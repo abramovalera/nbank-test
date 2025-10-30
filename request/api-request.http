@@ -149,7 +149,7 @@ Authorization: Basic YW5uYTpUZXN0MTIzNCR=
 
 // ожидаем 200
 
-### Positive Депозит в аккаунт пользователя vova
+### Positive Депозит в аккаунт пользователя vova 500
 POST http://localhost:4111/api/v1/accounts/deposit
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -161,7 +161,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 200
 
-### Positive Депозит в аккаунт пользователя anna
+### Positive Депозит в аккаунт пользователя anna 300
 POST http://localhost:4111/api/v1/accounts/deposit
 Content-Type: application/json
 Authorization: Basic YW5uYTpUZXN0MTIzNCR=
@@ -173,7 +173,7 @@ Authorization: Basic YW5uYTpUZXN0MTIzNCR=
 
 // ожидаем 200
 
-### Positive Перевод с аккаунта vova на anna
+### Positive Перевод с аккаунта vova на anna 100
 POST http://localhost:4111/api/v1/accounts/transfer
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -197,7 +197,57 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 200
 
-### Negative Создание пользователя короткий username (2 символа)
+### Positive Депозит граничное значение 5000
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 5000
+}
+
+// ожидаем 200
+
+### Positive Депозит граничное значение 0.01
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 0.01
+}
+
+// ожидаем 200
+
+### Positive Перевод граничное значение 10000
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 10000
+}
+
+// ожидаем 200
+
+### Positive Перевод граничное значение 0.01
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 0.01
+}
+
+// ожидаем 200
+
+### Negative Создание пользователя короткий username 2 символа
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -210,7 +260,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя username 16 символов
+### Negative Создание пользователя длинный username 16 символов
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -236,7 +286,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя с username содержащим пробел
+### Negative Создание пользователя username с пробелом
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -249,7 +299,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя запрещенные символы (@)
+### Negative Создание пользователя username с запрещенными символами @
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -275,7 +325,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя без цифр
+### Negative Создание пользователя password без цифр
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -288,7 +338,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя без заглавной буквы
+### Negative Создание пользователя password без заглавной буквы
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -301,7 +351,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя без строчной буквы
+### Negative Создание пользователя password без строчной буквы
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -314,7 +364,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя без спецсимвола
+### Negative Создание пользователя password без спецсимвола
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -327,7 +377,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя с пробелом в пароле
+### Negative Создание пользователя password с пробелом
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -340,7 +390,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя некорректная роль
+### Negative Создание пользователя некорректная роль QA
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -353,7 +403,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Создание пользователя с существующим username
+### Negative Создание пользователя с существующим username vova
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -366,7 +416,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Пароль менее 8 символов
+### Negative Создание пользователя password менее 8 символов
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -379,7 +429,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 // ожидаем 400
 
-### Negative Депозит отрицательная сумма
+### Negative Депозит отрицательная сумма -50
 POST http://localhost:4111/api/v1/accounts/deposit
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -391,7 +441,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Депозит больше максимума
+### Negative Депозит больше максимума 5001
 POST http://localhost:4111/api/v1/accounts/deposit
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -403,7 +453,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Депозит в чужой аккаунт
+### Negative Депозит в чужой аккаунт 999
 POST http://localhost:4111/api/v1/accounts/deposit
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -415,7 +465,19 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Перевод больше баланса
+### Negative Депозит граничное значение больше максимума 5000.01
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 5000.01
+}
+
+// ожидаем 400
+
+### Negative Перевод больше баланса 1000
 POST http://localhost:4111/api/v1/accounts/transfer
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -428,7 +490,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Перевод отрицательная сумма
+### Negative Перевод отрицательная сумма -10
 POST http://localhost:4111/api/v1/accounts/transfer
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -441,7 +503,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Перевод больше лимита
+### Negative Перевод больше лимита 10001
 POST http://localhost:4111/api/v1/accounts/transfer
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -467,6 +529,19 @@ Authorization: Basic YW5uYTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
+### Negative Перевод граничное значение больше лимита 10000.01
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 10000.01
+}
+
+// ожидаем 400
+
 ### Negative Изменение имени одно слово
 PUT http://localhost:4111/api/v1/customer/profile
 Content-Type: application/json
@@ -478,7 +553,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Имя с цифрами
+### Negative Изменение имени с цифрами
 PUT http://localhost:4111/api/v1/customer/profile
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -489,7 +564,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Три слова в имени
+### Negative Изменение имени три слова
 PUT http://localhost:4111/api/v1/customer/profile
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -500,7 +575,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Имя с спецсимволами
+### Negative Изменение имени с спецсимволами
 PUT http://localhost:4111/api/v1/customer/profile
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -511,7 +586,7 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 
 // ожидаем 400
 
-### Negative Попытка перевода без авторизации
+### Negative Перевод без авторизации
 POST http://localhost:4111/api/v1/accounts/transfer
 Content-Type: application/json
 
@@ -523,7 +598,7 @@ Content-Type: application/json
 
 // ожидаем 401
 
-### Negative Попытка депозита без авторизации
+### Negative Депозит без авторизации
 POST http://localhost:4111/api/v1/accounts/deposit
 Content-Type: application/json
 
@@ -534,7 +609,7 @@ Content-Type: application/json
 
 // ожидаем 401
 
-### Negative Попытка создания пользователя без авторизации
+### Negative Создание пользователя без авторизации
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 
@@ -546,7 +621,7 @@ Content-Type: application/json
 
 // ожидаем 401
 
-### Negative Попытка доступа к админке пользователем
+### Negative Доступ к админке пользователем
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic dm92YTpUZXN0MTIzNCR=
@@ -558,3 +633,4 @@ Authorization: Basic dm92YTpUZXN0MTIzNCR=
 }
 
 // ожидаем 403
+
