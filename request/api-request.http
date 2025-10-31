@@ -1,0 +1,636 @@
+### Positive Авторизация admin
+POST http://localhost:4111/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя vova
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "vova",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя anna
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "anna",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя с username 3 символа (граничное значение)
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "abc",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя с username 15 символов (граничное значение)
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "abcdefghijklmno",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя с username содержащим точку
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "user.name",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя с username содержащим дефис
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "user-name",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя с username содержащим подчеркивание
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "user_name",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Создание пользователя с username содержащим цифры
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "user123",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 200
+
+### Positive Авторизация пользователя vova
+POST http://localhost:4111/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "vova",
+  "password": "Test1234$"
+}
+
+// ожидаем 200
+
+### Positive Авторизация пользователя anna
+POST http://localhost:4111/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "anna",
+  "password": "Test1234$"
+}
+
+// ожидаем 200
+
+### Positive Создание аккаунта пользователя vova
+POST http://localhost:4111/api/v1/accounts
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+// ожидаем 200
+
+### Positive Создание аккаунта пользователя anna
+POST http://localhost:4111/api/v1/accounts
+Content-Type: application/json
+Authorization: Basic YW5uYTpUZXN0MTIzNCR=
+
+// ожидаем 200
+
+### Positive Депозит в аккаунт пользователя vova 500
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 500
+}
+
+// ожидаем 200
+
+### Positive Депозит в аккаунт пользователя anna 300
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic YW5uYTpUZXN0MTIzNCR=
+
+{
+  "id": 2,
+  "balance": 300
+}
+
+// ожидаем 200
+
+### Positive Перевод с аккаунта vova на anna 100
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 100
+}
+
+// ожидаем 200
+
+### Positive Изменение имени профиля vova
+PUT http://localhost:4111/api/v1/customer/profile
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "name": "Vova Ivanov"
+}
+
+// ожидаем 200
+
+### Positive Депозит граничное значение 5000
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 5000
+}
+
+// ожидаем 200
+
+### Positive Депозит граничное значение 0.01
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 0.01
+}
+
+// ожидаем 200
+
+### Positive Перевод граничное значение 10000
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 10000
+}
+
+// ожидаем 200
+
+### Positive Перевод граничное значение 0.01
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 0.01
+}
+
+// ожидаем 200
+
+### Negative Создание пользователя короткий username 2 символа
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "vo",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя длинный username 16 символов
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "testttestttesttt",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя пустой username
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя username с пробелом
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "user name",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя username с запрещенными символами @
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "vova@777",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя пустой пароль
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "useremptypass",
+  "password": "",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя password без цифр
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "usernodigit",
+  "password": "Password$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя password без заглавной буквы
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "usernoupp",
+  "password": "password1$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя password без строчной буквы
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "usernolow",
+  "password": "PASSWORD1$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя password без спецсимвола
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "usernocpez",
+  "password": "Password1",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя password с пробелом
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "probeluser",
+  "password": "Pass word1$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя некорректная роль QA
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "userpuzer",
+  "password": "Test1234$",
+  "role": "QA"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя с существующим username vova
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "vova",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Создание пользователя password менее 8 символов
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "shortpass",
+  "password": "Test1$",
+  "role": "USER"
+}
+
+// ожидаем 400
+
+### Negative Депозит отрицательная сумма -50
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": -50
+}
+
+// ожидаем 400
+
+### Negative Депозит больше максимума 5001
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 5001
+}
+
+// ожидаем 400
+
+### Negative Депозит в чужой аккаунт 999
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 999,
+  "balance": 100
+}
+
+// ожидаем 400
+
+### Negative Депозит граничное значение больше максимума 5000.01
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "id": 1,
+  "balance": 5000.01
+}
+
+// ожидаем 400
+
+### Negative Перевод больше баланса 1000
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 1000
+}
+
+// ожидаем 400
+
+### Negative Перевод отрицательная сумма -10
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": -10
+}
+
+// ожидаем 400
+
+### Negative Перевод больше лимита 10001
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 10001
+}
+
+// ожидаем 400
+
+### Negative Перевод с чужого аккаунта
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic YW5uYTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 100
+}
+
+// ожидаем 400
+
+### Negative Перевод граничное значение больше лимита 10000.01
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 10000.01
+}
+
+// ожидаем 400
+
+### Negative Изменение имени одно слово
+PUT http://localhost:4111/api/v1/customer/profile
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "name": "Vova"
+}
+
+// ожидаем 400
+
+### Negative Изменение имени с цифрами
+PUT http://localhost:4111/api/v1/customer/profile
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "name": "Vova 123"
+}
+
+// ожидаем 400
+
+### Negative Изменение имени три слова
+PUT http://localhost:4111/api/v1/customer/profile
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "name": "Vova Ivanov Petrov"
+}
+
+// ожидаем 400
+
+### Negative Изменение имени с спецсимволами
+PUT http://localhost:4111/api/v1/customer/profile
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "name": "Vova@ Ivanov"
+}
+
+// ожидаем 400
+
+### Negative Перевод без авторизации
+POST http://localhost:4111/api/v1/accounts/transfer
+Content-Type: application/json
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 100
+}
+
+// ожидаем 401
+
+### Negative Депозит без авторизации
+POST http://localhost:4111/api/v1/accounts/deposit
+Content-Type: application/json
+
+{
+  "id": 1,
+  "balance": 100
+}
+
+// ожидаем 401
+
+### Negative Создание пользователя без авторизации
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+
+{
+  "username": "hacker",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 401
+
+### Negative Доступ к админке пользователем
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+{
+  "username": "hacker",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+// ожидаем 403
+

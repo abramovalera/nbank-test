@@ -1,0 +1,36 @@
+### Проверка баланса vova после операций
+GET http://localhost:4111/api/v1/customer/accounts
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+// баланс уменьшился после перевода
+
+### Проверка баланса anna после операций
+GET http://localhost:4111/api/v1/customer/accounts
+Authorization: Basic YW5uYTpUZXN0MTIzNCR=
+
+// баланс увеличился после перевода
+
+### Проверка транзакций аккаунта vova
+GET http://localhost:4111/api/v1/accounts/1/transactions
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+// наличие транзакций депозита и перевода
+
+### Проверка транзакций аккаунта anna
+GET http://localhost:4111/api/v1/accounts/2/transactions
+Authorization: Basic YW5uYTpUZXN0MTIzNCR=
+
+// наличие транзакций депозита и перевода
+
+### Проверка профиля vova
+GET http://localhost:4111/api/v1/customer/profile
+Authorization: Basic dm92YTpUZXN0MTIzNCR=
+
+// имя изменилось на Vova Ivanov
+
+
+### Получение списка всех пользователей (админом)
+GET http://localhost:4111/api/v1/admin/users
+Authorization: Basic YWRtaW46YWRtaW4=
+
+//  наличие созданных пользователей
