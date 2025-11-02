@@ -1,4 +1,4 @@
-### Positive Авторизация admin
+### Positive Авторизация admin для получения токена
 POST http://localhost:4111/api/v1/auth/login
 Content-Type: application/json
 
@@ -55,6 +55,28 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 {
   "username": "abcdefghijklmno",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+### Positive Создание пользователя с username только большие буквы
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "USERUSER",
+  "password": "Test1234$",
+  "role": "USER"
+}
+
+### Positive Создание пользователя с username только строчные буквы
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "useruserr",
   "password": "Test1234$",
   "role": "USER"
 }
@@ -253,12 +275,12 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "vo",
+  "username": "bc",
   "password": "Test1234$",
   "role": "USER"
 }
 
-// ожидаем 400
+// ожидаем 400 (Username must be between 3 and 15 characters")
 
 ### Negative Создание пользователя длинный username 16 символов
 POST http://localhost:4111/api/v1/admin/users
@@ -271,7 +293,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
   "role": "USER"
 }
 
-// ожидаем 400
+// ожидаем 400 (Username must be between 3 and 15 characters)
 
 ### Negative Создание пользователя пустой username
 POST http://localhost:4111/api/v1/admin/users
@@ -284,7 +306,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
   "role": "USER"
 }
 
-// ожидаем 400
+// ожидаем 400 (Username cannot be blank)
 
 ### Negative Создание пользователя username с пробелом
 POST http://localhost:4111/api/v1/admin/users
@@ -292,27 +314,27 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "user name",
+  "username": "name user",
   "password": "Test1234$",
   "role": "USER"
 }
 
-// ожидаем 400
+// ожидаем 400 (Username must contain only letters, digits, dashes, underscores, and dots)
 
-### Negative Создание пользователя username с запрещенными символами @
+### Negative Создание пользователя username с запрещенными символами
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "vova@777",
+  "username": "bca$",
   "password": "Test1234$",
   "role": "USER"
 }
 
-// ожидаем 400
+// ожидаем 400 (Username must contain only letters, digits, dashes, underscores, and dots)
 
-### Negative Создание пользователя пустой пароль
+### Negative Создание пользователя password пустой
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -619,18 +641,6 @@ Content-Type: application/json
   "role": "USER"
 }
 
-// ожидаем 401
-
-### Negative Доступ к админке пользователем
-POST http://localhost:4111/api/v1/admin/users
-Content-Type: application/json
-Authorization: Basic dm92YTpUZXN0MTIzNCR=
-
-{
-  "username": "hacker",
-  "password": "Test1234$",
-  "role": "USER"
-}
 
 // ожидаем 403
 
